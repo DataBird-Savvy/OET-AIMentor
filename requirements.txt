@@ -14,3 +14,4 @@ sentence-transformers
 pandas
 openai
 pymongo[srv]
+huggingface_hub[hf_xet]
