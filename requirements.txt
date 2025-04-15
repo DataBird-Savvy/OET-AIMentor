@@ -1,0 +1,16 @@
+pymongo
+pinecone
+langchain-community
+langchain_pinecone
+langchain 
+langchain-community
+pydantic
+langchain-google-genai
+langchain-core
+groq
+flask
+gunicorn
+sentence-transformers
+pandas
+openai
+pymongo[srv]
