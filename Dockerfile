@@ -10,11 +10,11 @@ COPY . /code
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-EXPOSE 7860
+EXPOSE 8000
 
 ENV FLASK_APP=app.py
 ENV FLASK_RUN_HOST=0.0.0.0
-ENV FLASK_RUN_PORT=7860
+ENV FLASK_RUN_PORT=8000
 
 CMD ["python", "app.py"]
 
