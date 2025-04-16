@@ -1,18 +1,21 @@
 FROM python:3.12-slim
 
-RUN useradd -m -u 1000 user
-USER user
-ENV PATH="/home/user/.local/bin:$PATH"
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /app
+WORKDIR /code
 
-COPY --chown=user ./requirements.txt requirements.txt
+COPY . /code
+
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY --chown=user . /app
+EXPOSE 7860
 
-EXPOSE 8000
+ENV FLASK_APP=app.py
+ENV FLASK_RUN_HOST=0.0.0.0
+ENV FLASK_RUN_PORT=7860
 
-CMD ["gunicorn", "-w", "1", "-b", "0.0.0.0:8000", "--timeout", "300", "--log-level", "info", "--access-logfile", "-", "app:app"]
+CMD ["python", "app.py"]
 
 

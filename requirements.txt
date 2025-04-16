@@ -9,7 +9,6 @@ langchain-google-genai
 langchain-core
 groq
 flask
-gunicorn
 sentence-transformers
 pandas
 openai
