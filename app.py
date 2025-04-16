@@ -8,7 +8,7 @@ import json
 import time
 from dotenv import load_dotenv
 import os
-import psutil
+
 
 load_dotenv()
 
@@ -18,10 +18,7 @@ DB_TASKA="db/readingpartA_topics.db"
 DB_TASKB="db/readingpartB_inputs_3Q.db"
 DB_TASKC="db/readingpartC_topicsforRAG.db"
 
-def log_memory_usage(note=""):
-    process = psutil.Process(os.getpid())
-    mem = process.memory_info().rss / 1024 / 1024  # Memory in MB
-    print(f"[{note}] Memory Usage: {mem:.2f} MB")
+
 
 @app.route('/')
 def index():
@@ -88,7 +85,7 @@ def writing_task():
 
 @app.route('/listening_task', methods=['GET', 'POST'])
 def listening_task():
-    log_memory_usage("Start")
+    
     listening_assistant = OETListeningTaskAssistant()
     logging.info("Entered listening_task route with method: %s", request.method)
     time_allowed = session.get('time_allowed', 45)
@@ -150,7 +147,7 @@ def listening_task():
         
         filtered_A, filtered_B, filtered_C, audiofile_path = listening_assistant.search_and_retrieve(user_query)
         audiofile_path = url_for('static', filename='artifacts/' + audiofile_path)
-        log_memory_usage("After loading data")
+        
         return render_template('ListeningTask.html', task_question=filtered_A, next_got=False, time_allowed=time_allowed, audio_file=audiofile_path, feedback=None, filtered_B=filtered_B, filtered_C=filtered_C, feedback_got=False)
     
     return render_template('ListeningTask.html', 
@@ -167,7 +164,7 @@ def listening_task():
 
 @app.route('/reading_task', methods=['GET', 'POST'])
 def reading_task():
-    log_memory_usage("Start")
+    
     reading_assistant=OETReadingTaskAssistant()
     
     logging.info("Entered reading_task route with method: %s", request.method)
@@ -372,7 +369,7 @@ def reading_task():
         taskCQA2=reading_assistant.rag_taskpartQA(taskCQA_prompt)
         logging.info("Task C2: %s", taskC2)
         logging.info("Task CQA2: %s", taskCQA2)
-        log_memory_usage("After loading data")
+        
         return render_template('ReadingTask.html', 
                                task_A=taskA,
                                task_qa_A=taskAQA,
