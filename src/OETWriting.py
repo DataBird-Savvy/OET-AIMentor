@@ -19,7 +19,7 @@ class OETWritingTaskAssistant:
         logging.info("Initializing OET Writing Task Assistant...")
         try:
             
-            self.client = ChatGoogleGenerativeAI(model="gemini-1.5-pro")
+            self.client = ChatGoogleGenerativeAI(model="models/gemini-1.5-flash")
             self.task_question = self.generate_task_question()
             logging.info("Initial task question generated successfully.")
         except Exception as e:
@@ -70,6 +70,7 @@ class OETWritingTaskAssistant:
     - **Nursing Management and Progress**
     - **Discharge Plan**
     - Case notes should be concise and in point form under each section and subsection.
+    - donot provide any examples or format
 
     2. **Develop a Writing Task**:
     - Provide clear instructions for candidates to draft a formal letter using the case notes.
@@ -89,20 +90,12 @@ class OETWritingTaskAssistant:
     - Begin with detailed case notes, fully structured into sections.
     - Follow with a concise writing task description in 1–2 sentences.
 
-    # Examples
-    - **Example Writing Task**:
-    Use the information in the case notes to draft a letter to Ms. Samantha Bruin, Senior Nurse at Greywalls Nursing Home, 27 Station Road, Greywalls, who will oversee Mr. Baker’s continued care at the Nursing Home.
-
+    
     # Notes
     - Maintain **h4** and **bold** style consistency for headings 'Notes' and 'Writing task' in dark grey box with white letter.
     - Ensure tone and style match OET standards.
     - Address specific recipient requirements with bold letter and line by line.
 
-    **In your answer:**
-    - Expand the relevant notes into complete sentences
-    - Do not use note form
-    - Use letter format
-    - The body of the letter should be approximately 180–200 words.
     """
             task_question = self.client.invoke(prompt)
             response_md = task_question.content.strip('```json\n').strip('```').strip()
