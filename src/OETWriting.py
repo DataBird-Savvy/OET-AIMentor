@@ -89,7 +89,6 @@ class OETWritingTaskAssistant:
     # Output Format
     - Begin with detailed case notes, fully structured into sections.
     - Follow with a concise writing task description in 1–2 sentences.
-
     
     # Notes
     - Maintain **h4** and **bold** style consistency for headings 'Notes' and 'Writing task' in dark grey box with white letter.
