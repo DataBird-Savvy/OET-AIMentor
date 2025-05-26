@@ -27,7 +27,6 @@ class OETReadingTaskAssistant:
             self.PINECONE_API = os.getenv("PINE_CONE_API")
             self.INDEX_NAME_A = os.getenv("INDEX_NAME_A")
             self.INDEX_NAME_C = "oet-partc-content"
-            self.artifact_path = "static/artifacts"
             self.GROQ_API_KEY = os.getenv("GROQ_API_KEY")
             self.ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
 
